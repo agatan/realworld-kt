@@ -2,7 +2,6 @@ package dev.agatan.controllers
 
 import dev.agatan.interfaces.*
 import io.ktor.application.*
-import io.ktor.http.*
 import io.ktor.locations.*
 import io.ktor.request.*
 import io.ktor.response.*
