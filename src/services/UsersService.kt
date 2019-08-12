@@ -6,8 +6,8 @@ class UsersService {
   private val usersStore = mutableListOf<User>()
 
   fun getUsers(): List<User> = usersStore.toList()
-  fun createUser(name: String): User {
-    val newUser = User(UserId(usersStore.size), name)
+  fun createUser(name: String, email: String): User {
+    val newUser = User(UserId(usersStore.size), name, email)
     usersStore.add(newUser)
     return newUser
   }

@@ -28,13 +28,13 @@ fun Application.usersRoute(usersService: UsersService) {
         if (user == null) {
           call.respond(HttpStatusCode.NotFound)
         } else {
-          call.respond(User(user.id.toInt(), user.name))
+          call.respond(User(user))
         }
       }
 
       post("/") {
         val request = call.receive<CreateUserRequest>()
-        val user = usersService.createUser(request.name)
+        val user = usersService.createUser(request.name, request.email)
         call.respond(User(user))
       }
     }
