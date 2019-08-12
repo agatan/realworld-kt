@@ -4,6 +4,7 @@ import dev.agatan.interfaces.*
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.locations.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -19,6 +20,11 @@ fun Application.usersRoute() {
       data class UserGet(val userId: Int)
       get<UserGet> {
         call.respond(User(1, "me"))
+      }
+
+      post("/") {
+        val request = call.receive<CreateUserRequest>()
+        call.respond(User(1, request.name))
       }
     }
   }
