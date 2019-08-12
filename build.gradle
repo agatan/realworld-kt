@@ -33,6 +33,7 @@ dependencies {
   implementation "ch.qos.logback:logback-classic:$logback_version"
   implementation "io.ktor:ktor-locations:$ktor_version"
   implementation "io.ktor:ktor-jackson:$ktor_version"
+  implementation 'org.kodein.di:kodein-di-generic-jvm:6.3.3'
 
   testImplementation "io.ktor:ktor-server-tests:$ktor_version"
   testImplementation "io.mockk:mockk:1.9.3"

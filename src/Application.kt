@@ -8,21 +8,31 @@ import io.ktor.jackson.*
 import io.ktor.locations.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import org.kodein.di.*
+import org.kodein.di.generic.*
 
 fun main(args: Array<String>) {
   embeddedServer(Netty, commandLineEnvironment(args)).start(true)
 }
 
-@Suppress("unused") // Referenced in application.conf
-@kotlin.jvm.JvmOverloads
-fun Application.module() {
+@Suppress("unused")
+fun Application.main() {
+  mainModule(Kodein {
+    bind<UsersService>() with singleton { UsersService() }
+  })
+}
+
+fun Application.installPlugins() {
   install(DefaultHeaders)
   install(Locations)
   install(ContentNegotiation) {
     jackson {
     }
   }
-  val usersService = UsersService()
-  usersRoute(usersService)
 }
 
+fun Application.mainModule(kodein: Kodein) {
+  installPlugins()
+  val usersService by kodein.instance<UsersService>()
+  usersRoute(usersService)
+}
