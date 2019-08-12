@@ -1,6 +1,7 @@
 package dev.agatan
 
 import dev.agatan.controllers.*
+import dev.agatan.services.*
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
@@ -21,6 +22,7 @@ fun Application.module() {
 
     }
   }
-  usersRoute()
+  val usersService = UsersService()
+  usersRoute(usersService)
 }
 
