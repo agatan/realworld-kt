@@ -5,7 +5,6 @@ import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
 import io.ktor.locations.*
-import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
