@@ -12,6 +12,7 @@ import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.*
 import org.kodein.di.*
 import org.kodein.di.generic.*
+import org.kodein.di.ktor.*
 
 fun main(args: Array<String>) {
   embeddedServer(Netty, commandLineEnvironment(args)).start(true)
@@ -22,10 +23,12 @@ fun Application.main() {
   Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver")
   installPlugins()
 
-  val kodein = (Kodein {
+  kodein {
     bind<UserRepository>() with singleton { UserRepositoryImpl() }
-  })
-  val usersService by kodein.newInstance { UsersService(instance()) }
+    bind<UsersService>() with singleton { UsersService(instance()) }
+  }
+
+  val usersService by kodein().instance<UsersService>()
   usersRoute(usersService)
 }
 

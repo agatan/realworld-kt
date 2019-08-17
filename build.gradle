@@ -34,6 +34,7 @@ dependencies {
   implementation "io.ktor:ktor-locations:$ktor_version"
   implementation "io.ktor:ktor-jackson:$ktor_version"
   implementation 'org.kodein.di:kodein-di-generic-jvm:6.3.3'
+  implementation 'org.kodein.di:kodein-di-framework-ktor-server-jvm:6.3.3'
   implementation 'org.jetbrains.exposed:exposed:0.16.1'
 
   testImplementation "io.ktor:ktor-server-tests:$ktor_version"
