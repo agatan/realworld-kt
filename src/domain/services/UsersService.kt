@@ -2,18 +2,16 @@ package dev.agatan.services
 
 import dev.agatan.domain.*
 
-class UsersService {
-  private val usersStore = mutableListOf<User>()
+interface UserRepository {
+  fun getUsers(): List<User>
+  fun getUser(id: UserId): User?
+  fun createUser(name: String, email: String): User
+}
 
-  fun getUsers(): List<User> = usersStore.toList()
+class UsersService(private val userRepository: UserRepository) {
+  fun getUsers(): List<User> = userRepository.getUsers()
 
-  fun createUser(name: String, email: String): User {
-    val newUser = User(UserId(usersStore.size), name, email)
-    usersStore.add(newUser)
-    return newUser
-  }
+  fun createUser(name: String, email: String): User = userRepository.createUser(name, email)
 
-  fun getUser(id: UserId): User? {
-    return usersStore.find { it.id == id }
-  }
+  fun getUser(id: UserId): User? = userRepository.getUser(id)
 }
