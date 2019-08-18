@@ -34,7 +34,6 @@ fun Application.installPlugins() {
   install(DefaultHeaders)
   install(Locations)
   install(ContentNegotiation) {
-    jackson {
-    }
+    jackson()
   }
 }
