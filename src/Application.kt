@@ -20,7 +20,12 @@ fun main(args: Array<String>) {
 @Suppress("unused")
 fun Application.main() {
   Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver")
-  installPlugins()
+
+  install(DefaultHeaders)
+  install(Locations)
+  install(ContentNegotiation) {
+    jackson()
+  }
 
   kodein {
     bind<UserRepository>() with singleton { UserRepositoryImpl() }
@@ -28,12 +33,4 @@ fun Application.main() {
   }
 
   registerUsersRoute(kodein())
-}
-
-fun Application.installPlugins() {
-  install(DefaultHeaders)
-  install(Locations)
-  install(ContentNegotiation) {
-    jackson()
-  }
 }
