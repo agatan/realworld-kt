@@ -6,11 +6,7 @@ import dev.agatan.controllers.*
 import dev.agatan.domain.*
 import dev.agatan.interfaces.*
 import dev.agatan.services.*
-import io.ktor.application.*
-import io.ktor.features.*
 import io.ktor.http.*
-import io.ktor.jackson.*
-import io.ktor.locations.*
 import io.ktor.server.testing.*
 import io.mockk.*
 import kotlin.test.*
@@ -35,7 +31,7 @@ class UserControllerTest {
   private fun testApp(callback: TestApplicationEngine.() -> Unit) {
     withTestApplication({
       installPlugins()
-      usersRoute(usersService)
+      registerUsersRoute(usersService)
     }) { callback() }
   }
 }

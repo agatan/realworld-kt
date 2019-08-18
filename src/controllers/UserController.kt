@@ -10,8 +10,15 @@ import io.ktor.locations.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import org.kodein.di.*
+import org.kodein.di.generic.*
 
-fun Application.usersRoute(usersService: UsersService) {
+fun Application.registerUsersRoute(kodein: Kodein) {
+  val usersService: UsersService by kodein.instance()
+  registerUsersRoute(usersService)
+}
+
+fun Application.registerUsersRoute(usersService: UsersService) {
   routing {
     route("/users") {
       get("/") {

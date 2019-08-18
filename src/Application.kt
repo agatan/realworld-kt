@@ -10,7 +10,6 @@ import io.ktor.locations.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.*
-import org.kodein.di.*
 import org.kodein.di.generic.*
 import org.kodein.di.ktor.*
 
@@ -28,8 +27,7 @@ fun Application.main() {
     bind<UsersService>() with singleton { UsersService(instance()) }
   }
 
-  val usersService by kodein().instance<UsersService>()
-  usersRoute(usersService)
+  registerUsersRoute(kodein())
 }
 
 fun Application.installPlugins() {
